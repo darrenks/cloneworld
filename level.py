@@ -75,8 +75,13 @@ class Level:
             if (self.isDeathTile(x, y) == True):
                 self.monsters[id].setActive(False)
         
+    def updatePlayer(self):
+        x, y = self.player.getNextMove(self.isWall)
+        self.player.setLocation(x, y)
+        
     def tick(self):
         self.updateMonsters()
+        self.updatePlayer()
         self.ticks += 1
         
     def briefLocations(self):

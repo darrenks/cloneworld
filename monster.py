@@ -1,13 +1,13 @@
 '''
 @authors: Richard B. Johnson
 '''
-from entity import Entity, Direction
+from entity import Entity, Action
 from utility import *
 
 class Monster(Entity):
     pattern = {}
     
-    def __init__(self, type, x=0, y=0, f=Direction.S):
+    def __init__(self, type, x=0, y=0, f=Action.South):
         Entity.__init__(x, y, f)
         self.type = type
          

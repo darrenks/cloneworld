@@ -1,23 +1,30 @@
 import sys
 
-from direction import Direction
+from action import Action
 from level import Level
 from game import Game
 
+CloneWorld = Game()
+
+def load_level(path, lvlID = 1, format = None):
+    return CloneWorld.level.load(path, lvlID)
+
+def move_chip(action = Action.Wait):
+    return
+    
 def sandbox():
-    game = Game()
-    game.level = Level()
-    pid = game.level.setPlayer(5, 6, Direction.S)
-    mid = game.level.addMonster("ball", 12, 7, Direction.E)
+    CloneWorld.level = Level()
+    pid = CloneWorld.level.setPlayer(5, 6, Action.South)
+    mid = CloneWorld.level.addMonster("ball", 12, 7, Action.East)
     # NO RELATION TO THE BALL DEMO
     
-    print game.level.monsters[mid].brief()
+    print CloneWorld.level.monsters[mid].brief()
     
     for i in range(0, 20):
-        game.update()
-        print game.level.monsters[mid].brief()
+        CloneWorld.update()
+        print CloneWorld.level.monsters[mid].brief()
         
-    print "\n", game.level.monsters[mid]
+    print "\n", CloneWorld.level.monsters[mid]
 
 def main(argv):
     sandbox()
