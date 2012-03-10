@@ -84,6 +84,9 @@ class Level:
         self.updatePlayer()
         self.ticks += 1
         
+    def displayView(self):
+        print self.tiles
+        
     def briefLocations(self):
         s = ""
         

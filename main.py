@@ -4,13 +4,17 @@ from action import Action
 from level import Level
 from game import Game
 
-CloneWorld = Game()
+CloneWorld = Game(500)
 
 def load_level(path, lvlID = 1, format = None):
     return CloneWorld.level.load(path, lvlID)
 
 def move_chip(action = Action.Wait):
-    return
+    CloneWorld.player.setNextAction(action)
+    CloneWorld.level.displayView()
+    
+def quit_game():
+    CloneWorld.active = False
     
 def sandbox():
     CloneWorld.level = Level()
@@ -27,7 +31,7 @@ def sandbox():
     print "\n", CloneWorld.level.monsters[mid]
 
 def main(argv):
-    sandbox()
+    while CloneWorld.update(): 1
     
 if __name__ == "__main__":
     main(sys.argv[1:])

@@ -4,14 +4,18 @@
 from level import *
 from utility import *
 
+import time
+
 class Game:
-    def __init__(self, path=""):
+    def __init__(self, interval = 200, path=""):
         self.reset()
+        self.interval = interval
         
         if (len(path) > 0):
             self.loadPackageData(path)
         
     def reset(self):
+        self.active = False
         self.totalscore = 0
         self.resetPackageData()
         
@@ -27,7 +31,7 @@ class Game:
             # load the header information
             file = open(path, "rb")
             self.datafile = path
-            self.levels = 0
+            #self.levels = 0
         except IOError as e:
             debug.error(e)
         finally:
@@ -57,6 +61,11 @@ class Game:
             self.resetPackageData()
         
     def update(self):
-        self.level.tick()
+        if (self.active == False):
+            return False
         
+        self.level.tick()
+        time.sleep(self.interval / 1000.0)
+        
+        return True
     

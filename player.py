@@ -14,8 +14,14 @@ class Player(Entity):
         
         if debug.active: print self
         
+    def setNextAction(self, action):
+        self.nextAction = action
+        
     def getNextMove(self, isWall):
-        x, y = self.getNextStep()
+        x, y = self.getNextStep(self.nextAction)
+        
+        self.setFacing(self.nextAction)
+        self.nextAction = Action.Wait
         
         if (isWall(x, y) == True):
             return self.X, self.Y

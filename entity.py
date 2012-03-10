@@ -31,8 +31,9 @@ class Entity:
         
     @classmethod
     def setFacing(self, f):
-        self.facing = f
-        
+        if (f != Action.Wait):
+            self.facing = f
+            
     @classmethod
     def turnLeft(self):
         self.facing = Action.turnLeft(self.facing)
@@ -46,8 +47,9 @@ class Entity:
         self.facing = Action.turnAround(self.facing)
 
     @classmethod
-    def getNextStep(self):
-        x, y = Action.nextStep(self.facing)
+    def getNextStep(self, dir = None):
+        if (dir is None): dir = self.facing
+        x, y = Action.nextStep(dir)
         return self.X + x, self.Y + y
     
     @abstractmethod
